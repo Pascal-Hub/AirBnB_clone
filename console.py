@@ -2,8 +2,15 @@
 
 """contains the entry point of the command interpreter"""
 import cmd
+import re
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.review import Review
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
 
 
 class HBNBCommand(cmd.Cmd):
@@ -137,6 +144,32 @@ class HBNBCommand(cmd.Cmd):
         setattr(storage.all()[name_id], arg_list[2], arg_list[3])
         storage.save()
 
+    def default(self, arg):
+        """Handles other inputs not captured"""
+        my_dict = {"all": self.do_all,
+                   "show": self.do_show,
+                   "destroy": self.do_destroy,
+                   "count": self.do_count,
+                   "update": self.do_update
+                }
+        mo = re.search(r"\.", arg)
+        if mo:
+            arg_list = [arg[:mo.span()[0]], arg[mo.span()[1]]]
+            mo = re.search(r"\((.*?)\)", arg_list[1])
+            if mo:
+                func = [arg_list[1][:mo.span()[0]], mo.group()[1:-1]]
+                if func[0] in list(my_dict.keys()):
+                    string = "{} {}".format(arg_list[0], func[1])
+                    return my_dict[func[0]](string)
+        print("** no instance found **")
+
+    def do_count(self, arg):
+        """Counts the number of instances of a class"""
+        counter = 0
+        for value in storage.all().values():
+            if arg == value.__class__.__name__:
+                counter += 1
+        print(counter)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
