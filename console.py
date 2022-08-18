@@ -158,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
             mo = re.search(r"\((.*?)\)", arg_list[1])
             if mo:
                 func = [arg_list[1][:mo.span()[0]], mo.group()[1:-1]]
-                if func[0] in list(my_dict.keys()):
+                if func[0] in my_dict.keys():
                     string = "{} {}".format(arg_list[0], func[1])
                     return my_dict[func[0]](string)
         print("** no instance found **")
