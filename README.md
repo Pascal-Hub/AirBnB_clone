@@ -91,4 +91,4 @@ All tests should also pass in non-interactive mode: *$ echo "python3 -m unittest
 ## AUTHORS:
 
 - *Binael Nchekwube* - [Binael](https://github.com/binael)
-- *Lema Kefyalew* - [Lema](https://github.com/lemakefyalew)
+- *Pascal-Hub* - [Pascal](https://github.com/Pascal-Hub)
