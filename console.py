@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
                    "destroy": self.do_destroy,
                    "count": self.do_count,
                    "update": self.do_update
-                }
+                   }
         mo = re.search(r"\.", arg)
         if mo:
             arg_list = [arg[:mo.span()[0]], arg[mo.span()[1]]]
@@ -170,6 +170,7 @@ class HBNBCommand(cmd.Cmd):
             if arg == value.__class__.__name__:
                 counter += 1
         print(counter)
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
